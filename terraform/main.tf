@@ -6,3 +6,12 @@ provider "aws" {
   secret_key = var.aws_secret_key
   region = "us-east-1"
 }
+
+/*terraform {
+  backend "s3" {
+    bucket         = "k6application"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "terraform_state"
+  }
+}*/
