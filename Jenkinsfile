@@ -30,13 +30,10 @@
 
 pipeline{
     agent any
-  //   environment {
-	//     DOCKERHUB_CREDENTIALS=credentials('dockerhub-cred-biki')
-	// }
     stages {
         stage ('Build') {
             steps {
-                sh '''#!/bin/bash          
+                sh '''#!/bin/bash
                 python3 -m venv venv
                 source venv/bin/activate
                 pip install pip --upgrade
@@ -46,19 +43,21 @@ pipeline{
                 '''
             }
         }
-        stage('Test') {
-            steps {
-                // sh '''#!/bin/bash
-                // source test3/bin/activate
-                // py.test --verbose --junit-xml test-reports/results.xml
-                // '''
-            }
-            // post {
-            //     always {
-            //         junit 'test-reports/results.xml'
-            //     }
-            // }
-        }
+    }
+}
+        // stage('Test') {
+        //     steps {
+        //         // sh '''#!/bin/bash
+        //         // source test3/bin/activate
+        //         // py.test --verbose --junit-xml test-reports/results.xml
+        //         // '''
+        //     }
+        //     // post {
+        //     //     always {
+        //     //         junit 'test-reports/results.xml'
+        //     //     }
+        //     // }
+        // }
         
         // stage ('Create'){
         //     // agent{label 'dockerAgent'}
@@ -98,7 +97,4 @@ pipeline{
         //     //     }
         //     // }
         // }
-    }
-}
-
 
