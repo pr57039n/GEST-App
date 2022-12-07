@@ -11,8 +11,9 @@ pipeline{
                 python3 -m pip install django
                 pip install -r requirements.txt
                 cd app
+                touch db.sqlite3
                 python manage.py makemigrations
-                python manage.py  migrate
+                python manage.py migrate
                 python3 manage.py runserver 0.0.0.0:8000
                 '''
             }
