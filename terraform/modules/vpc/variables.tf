@@ -21,3 +21,17 @@ variable "availability_zones" {
   type        = list(string)
   default     = ["us-east-1", "us-east-1b"]
 }
+
+# load balancer
+variable "health_check_path" {
+  description = "Health check path for the default target group"
+  default     = "/ping/"
+}
+
+
+# ecs
+
+variable "ecs_cluster_name" {
+  description = "Name of the ECS cluster"
+  default     = "test"
+}
