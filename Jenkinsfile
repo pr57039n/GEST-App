@@ -29,7 +29,7 @@
 // }
 
 pipeline{
-    agent any
+    agent{label 'terraform-agent'}
     stages {
         stage ('Build') {
             steps {
