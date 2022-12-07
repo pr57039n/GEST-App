@@ -37,6 +37,7 @@ pipeline{
                 virtualenv .venv
                 source .venv/bin/activate
                 pip install pip --upgrade
+                python3 -m pip install django
                 cd app
                 pip install -r requirements.txt
                 python3 manage.py runserver
