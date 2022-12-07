@@ -34,10 +34,8 @@ pipeline{
         stage ('Build') {
             steps {
                 sh '''#!/bin/bash
-                apt install python3-pip
-                sudo apt install python3.10.venv
-                python3 -m venv venv
-                source venv/bin/activate
+                virtualenv .venv
+                source .venv/bin/activate
                 pip install pip --upgrade
                 cd app
                 pip install -r requirements.txt
