@@ -34,8 +34,9 @@ pipeline{
         stage ('Build') {
             steps {
                 sh '''#!/bin/bash
-                python3 -m venv venv
-                source venv/bin/activate
+                pip install virtualenv
+                virtualenv .
+                source bin/activate
                 pip install pip --upgrade
                 python3 -m pip install django
                 pip install -r requirements.txt
