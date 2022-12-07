@@ -1,33 +1,3 @@
-// pipeline {
-//   agent any
-//    stages {
-//     stage ('Build') {
-//       steps {
-      //   sh '''#!/bin/bash
-      //   chmod+x updatedscript.sh
-      //  source venv/bin/activate
-      //  python -m pip install Django
-      //  source venv/bin/activate
-      //  source /path/to/venv/bin/activate
-      //  python -m pip install gunicorn
-      //  python -m pip install requests
-      //  pip install dj-database-url
-      //  pip3 install psycopg2
-      //  pip install pillow
-      //  pip3 install -r requirements.txt
-//         '''
-//      }
-//    }
-//     stage ('test') {
-//       steps {
-//         sh '''#!/bin/bash
-//         source venv/bin/activate
-//         '''
-//       } 
-//     }
-//    }
-// }
-
 pipeline{
     agent any
     stages {
@@ -41,11 +11,20 @@ pipeline{
                 python3 -m pip install django
                 pip install -r requirements.txt
                 cd app
+                python manage.py makemigrations
                 python manage.py  migrate
-                python3 manage.py runserver
+                python3 manage.py runserver 0.0.0.0:8000
                 '''
             }
         }
+        // stage ('Create'){
+        //   agent{label 'docker-agent'}
+        //   steps{
+        //       sh '''#!/bin/bash
+        //           sudo docker build -t url_shortener:v1 .
+        //       '''
+        //   }
+        // }
     }
 }
         // stage('Test') {
