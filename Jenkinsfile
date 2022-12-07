@@ -41,6 +41,7 @@ pipeline{
                 python3 -m pip install django
                 pip install -r requirements.txt
                 cd app
+                python manage.py  migrate
                 python3 manage.py runserver
                 '''
             }
