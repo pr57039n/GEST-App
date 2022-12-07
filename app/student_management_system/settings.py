@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 # ALLOWED_HOSTS = ['smswithdjango.herokuapp.com']
-ALLOWED_HOSTS = ['44.204.187.215,0.0.0.0']  # Not recommended but useful in dev mode
+ALLOWED_HOSTS = ['44.204.187.215']  # Not recommended but useful in dev mode
 
 
 # Application definition
