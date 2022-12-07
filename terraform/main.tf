@@ -15,3 +15,13 @@ provider "aws" {
     dynamodb_table = "terraform_state"
   }
 }*/
+
+module "vpc" {
+  source       = "./Modules/vpc"
+  region       = "us-east-1"
+  project_name = "Django-Deployment"
+}
+
+module "Instance" {
+  source = "./Modules/Instances"
+}
