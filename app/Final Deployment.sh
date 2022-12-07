@@ -1,0 +1,48 @@
+
+wget https://github.com/bikigrg11/kura6_application
+sudo yum install
+sudo apt-get update
+sudo apt-get -y install python3-pip
+sudo apt-get -y install python3
+sudo apt install default-jre
+sudo  python -m pip install Django
+mkdir student mgmt
+sudo apt install python3-virtualenv
+sudo  source bin/activate
+sudo python3 manage.py runserver
+sudo apt install python3-django
+pip install dj-database-url
+python3 -m pip install gunicorn
+sudo apt install libpq-dev python3-dev
+pip3 install psycopg2
+pip install pillow
+python -m pip install requests
+sudo python -m pip install requests
+python -m pip install requests
+python3 -m pip install requests-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAr+uO6aLPCH0eG8p7B3bHJb6WPtpfSDttScltmFYSNvNY6Ctf
+9UcWeQfVHv2vd9V9lcusWjq8covJFLxIgQltpPiKqlGTqV4+Xl5tNo9IaSA264sy
+hL4ucua5Az2OGV07yF3jl5uCxrugbeYeDG5eC34DgA+09vdgSMwwkkbsF3Jkckok
+ROIhqjxCs42FK4DeVUkV98d6DH+nzgm53ZRTLRCPHqDMk8QDDEeOubBLeitplkCb
+aUkltQk4kYRofhcqF7ZPf06pYr7a+2HF9w0ewlvj7zYxYOWifnYJd4lyuQ9nDyhk
+D6+0JO8k9oh4BzbqMZHqS55ej62eU6x/POR41wIDAQABAoIBABk9h+y3olLKeNZt
+78b7YMlmlfIArOkVNbH/h4zy1Hwz4A63onXztCK7X/WpWlKsO++RIHJ1uPIKYlhq
+R1DURHoF+wdC2xfS4MnzbGIGntIOgDK9bwsiqlFsDyGK5Gd5PAmchvoKovHWm8cI
+3EjWUQH/G4t1NXa1uYfYXCOwr1ERp6hBnACeAzEeb4CJn5rByHfbQPA1wnM6enZs
+0RFNh4Iwi2ii+xI7YtkRTWEcsGKn4/bX5JThDqYgX+CgS26LPz03Sazxiz0W0Enq
+9lWMv89BqE8adQblxpS05nJZdq0sp7mj38PXp8xECoM/hweKN2/hi9xGySjF/3iO
+MtZF5pECgYEA/7rc+LdvBd9o6doxw/QXxUdjzCa//d5QfkzAb4LYl7/gG6ZvRYgi
+hwwGi/3xm60mXZWJosioVeGCALX+ghMK/BKHrck/CKGp1g5YupEiHutfClF06LXQ
+2jOTTpfMKMXLKkEe1ZkdoF3ZnDysiUyjNHbD+egUEIo3duZV2VK/dKkCgYEAsBse
+UYaWpJGin76epMFuujYBlMFbDIeRJ5McfcelTbdLlBSep5nl5kbDdmAaO2cwe06q
+MOGZAtB6cwugJMu7yglAaazTX487JtQr98EzykmRBbNZ4OAmFa5aoFKNGWrUzo+z
+wiUE7HBuIaSYUw1qw3nRZ1daWVvsy6KnmwnzcX8CgYBzIWyUaPkJ2s//4GThRIZj
+IcXTRmrPX4Q7qFBGo9DhWNgLer3DvwtUY1ybMAPTQ3vvTACAEfh/WZxOt6DSbMJY
+Q/tjiSPgve+ZWDIoJGkJJIxQN+X7UsepROj/zCV1Ab960YCRR3LoHPh4d3RyB9e+
+Ke4HF63Y2HEqDX7+7VsWqQKBgQCo78rc4GSgyIid/8nGOT1UaryHjBkg4ufvc+Nw
+EdZUwFJDYqh0FWGCzz1w0G45sBrFH0iKjdAv7/iXZn6g7cRe4xMkjMNUt11COWVY
+TcG1+26gblX5MG24fMK5a5ep2178LMR/qO2ZN52ernvlqEhT7wdfwF+Ou21kR8vL
+IfekVwKBgDXf+Ezw3Ric6e5AUOHe/OFViu+AsGIpZ37SBdPpBSNIWgIik0c3i83x
+OV9c5iD057QiUfiizw1HAk3b/UQRNB6jE1sKaIQA4xQQ7bJ8sdFuGWQFr+oFEXY6
+YC6wJLn0ATYrry6uiRBFJNR33GuND1MM3bnZscSMO41yilcInL3Y
+-----END RSA PRIVATE KEY-----
