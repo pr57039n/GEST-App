@@ -8,12 +8,11 @@ pipeline{
                 virtualenv .
                 source bin/activate
                 pip install pip --upgrade
-                python3 -m pip install django
                 pip install -r requirements.txt
                 cd app
                 touch db.sqlite3
                 python manage.py migrate
-                python3 manage.py runserver 0.0.0.0:8000
+                // python3 manage.py runserver 0.0.0.0:8000
                 '''
             }
         }
