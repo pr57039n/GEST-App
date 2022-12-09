@@ -17,3 +17,7 @@ output "private_subnet_az1" {
 output "private_subnet_az2" {
     value = aws_subnet.private_subnet_az2.id
 }
+
+output "alb_url" {
+    value = "http://${aws_lb.docker_instance_LB.dns_name}"
+}
