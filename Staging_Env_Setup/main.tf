@@ -31,8 +31,6 @@ module "EC2" {
     key_name = var.key_name
     private_subnet_az1_id = module.VPC.private_subnet_az1
     private_subnet_az2_id = module.VPC.private_subnet_az2
-    #security_groups = module.SG.load_balancer_security_group
-   #vpc_security_group_ids = [module.SG.ec2_access_security_group]
 }
 
 
