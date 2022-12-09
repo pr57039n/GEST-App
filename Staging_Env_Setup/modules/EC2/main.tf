@@ -5,7 +5,7 @@ resource "aws_instance" "private_ec2_1" {
     subnet_id = var.private_subnet_az1_id
     key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.ec2_access.id]
-    user_data = "${file(dockerserver.sh)}"
+    user_data = "${file("dockerserver.sh")}"
 
     tags = {
         Name : "Docker Server 1"
@@ -18,7 +18,7 @@ resource "aws_instance" "private_ec2_2" {
     subnet_id = var.private_subnet_az2_id
     key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.ec2_access.id]
-    user_data = "${file(dockerserver.sh)}"
+    user_data = "${file("dockerserver.sh")}"
 
     tags = {
         Name : "Docker Server 2"
