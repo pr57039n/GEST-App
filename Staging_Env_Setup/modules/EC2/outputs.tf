@@ -6,7 +6,7 @@ output "private_ec2_2_ip" {
     value = aws_instance.private_ec2_2.private_ip
 }
 
-output "aws_security_group_load_balancer" {
+output "aws_security_group_load_balancer_id" {
     value = aws_security_group.load-balancer.id
 }
 
