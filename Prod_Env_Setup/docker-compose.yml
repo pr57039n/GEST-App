@@ -1,0 +1,60 @@
+version: '2.13'
+# Defining the compose version
+services:
+
+# Django application
+ web:
+ 
+   # Build context
+   build: 
+    context: ./app/
+   
+   # Build commands
+   command: sh -c "cd /app && python manage.py migrate && gunicorn student_management_system.wsgi:application --bind 0.0.0.0:8000"
+   volumes:
+      - ./app/:/app
+      - static_files:/app/main_app/static
+   expose: 
+      - 8000
+   env_file:
+      - .env/dev.env
+
+
+#  # Nginx server
+ nginx:
+ 
+   # Build context
+   build: 
+      context: ./nginx
+   
+   # Mapping machine and container ports
+   ports:
+     - 80:80
+   volumes: 
+     - ./nginx/conf.d/:/etc/nginx/conf.d
+     - static_files:/home/app/static
+
+volumes: 
+   static_files:
+     
+#    # Storage volumes
+#    volumes:
+#      - static_volume:/home/app/web/static
+#      - media_volume:/home/app/web/mediafiles
+#    depends_on:
+#      - web
+#    restart: "on-failure"
+
+#    # Storage volumes
+#    volumes:
+#      - static_volume:/home/app/web/staticfiles
+#      - media_volume:/home/app/web/mediafiles
+     
+#    # Exposing port 8000
+#    expose: 
+#    - 8000
+#    restart: "on-failure"
+# volumes:
+#  postgres_data:
+#  static_volume:
+#  media_volume:
