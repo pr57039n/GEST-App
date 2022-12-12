@@ -8,6 +8,7 @@ pipeline{
                 virtualenv .
                 source bin/activate
                 pip install pip --upgrade
+                cd Prod_Env_Setup
                 pip install -r requirements.txt
                 cd app
                 touch db.sqlite3
