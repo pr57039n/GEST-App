@@ -27,9 +27,11 @@ pipeline{
         stage ('Create'){
             agent{label 'dockerAgent'}
             steps{
-                sh '''#!/bin/bash
-                    sudo docker build -t gestapp:v1 
-                '''
+                dir ('Prod_Env_Setup') {
+                    sh '''#!/bin/bash
+                        sudo docker-compose build 
+                    '''
+                } 
             }
         }
         stage ('Push'){
@@ -38,8 +40,10 @@ pipeline{
                 sh '''#!/bin/bash
                     sudo docker logout
                     sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
-                    sudo docker tag gestapp:v1 bikigrg/gestapp:v1
-                    sudo docker push bikigrg/gestapp:v1
+                    sudo docker tag gestapp_container:v1 bikigrg/gestapp_container:v1 
+                    sudo docker tag gestapp_nginx_container:latest bikigrg/gestapp_nginx_container:latest
+                    sudo docker push bikigrg/gestapp_container:latest
+                    sudo docker push bikigrg/gestapp_nginx_container:latest
                 '''
             }
         }

@@ -7,7 +7,9 @@ services:
  
    # Build context
    build: 
-    context: ./app/
+      context: ./app/
+   container_name: gestapp_container
+
    
    # Build commands
    command: sh -c "cd /app && python manage.py migrate && gunicorn student_management_system.wsgi:application --bind 0.0.0.0:8000"
@@ -26,6 +28,7 @@ services:
    # Build context
    build: 
       context: ./nginx
+   container_name: gestapp__nginx_container
    
    # Mapping machine and container ports
    ports:
