@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    environment {
+	    DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
     stages {
         stage ('Build') {
             steps {
@@ -13,6 +16,34 @@ pipeline{
                 '''
             }
         }
+        stage('Test') {
+            steps {
+                sh '''#!/bin/bash
+                source test3/bin/activate
+                echo test
+                '''
+            }
+        }
+        stage ('Create'){
+            agent{label 'dockerAgent'}
+            steps{
+                sh '''#!/bin/bash
+                    sudo docker build -t gestapp:v1 
+                '''
+            }
+        }
+        stage ('Push'){
+            agent{label 'dockerAgent'}
+            steps{
+                sh '''#!/bin/bash
+                    sudo docker logout
+                    sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
+                    sudo docker tag gestapp:v1 bikigrg/gestapp:v1
+                    sudo docker push bikigrg/gestapp:v1
+                '''
+            }
+        }
+
         // stage ('Create'){
         //   agent{label 'docker-agent'}
         //   steps{
