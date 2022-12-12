@@ -14,7 +14,7 @@ resource "aws_lb" "test-LB" {
 
 resource "aws_lb_target_group" "django-app" {
   name        = "${var.ecs_cluster_name}-tg"
-  port        = 8000
+  port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.test-vpc.id
 
