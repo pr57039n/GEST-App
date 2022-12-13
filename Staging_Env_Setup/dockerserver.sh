@@ -14,5 +14,5 @@ sudo docker run -d -p 80:8000 bikigrg/prod_env_setup_web:latest
 sudo docker run -it \
 -v $PWD:/e2e \
 -w /e2e \
--e CYPRESS_baseUrl=http://172.17.0.1:8000 \
+-e CYPRESS_baseUrl=http://172.17.0.1:80 \
 cypress/included:12.0.2 --browser firefox
