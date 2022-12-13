@@ -33,14 +33,14 @@ pipeline{
                 sh '''#!/bin/bash
                     sudo docker logout
                     sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
-                    sudo docker tag gestapp_container:v1 bikigrg/gestapp_container:v1 
-                    sudo docker tag gestapp_nginx_container:latest bikigrg/gestapp_nginx_container:latest
-                    sudo docker push bikigrg/gestapp_container:latest
-                    sudo docker push bikigrg/gestapp_nginx_container:latest
+                    sudo docker tag prod_env_setup_web:latest bikigrg/prod_env_setup_web:latest
+                    sudo docker tag prod_env_setup_nginx:latest bikigrg/prod_env_setup_nginx:latest
+                    sudo docker push bikigrg/prod_env_setup_nginx:latest
+                    sudo docker push bikigrg/prod_env_setup_web:latest
                 '''
             }
         }
-        stage('Test') {
+        stage('Staging') {
             steps {
                 sh '''#!/bin/bash
                 source test3/bin/activate
