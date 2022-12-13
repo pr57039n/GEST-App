@@ -1,8 +1,8 @@
 pipeline{
     agent any
     environment {
-	    DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-	}
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+    }
     stages {
         stage ('Build') {
             steps {
@@ -25,7 +25,6 @@ pipeline{
                         sudo docker-compose build 
                     '''
                 } 
->>>>>>> 0118ebd965a25b01cecda5d4e1c1120923d1dcf4
             }
         }
         stage ('Push'){
