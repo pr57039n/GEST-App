@@ -7,10 +7,10 @@ sudo apt -y install default-jre
 curl -fsSL https://share.wildbook.me/4PNafRIcXKRT2K5D.tar --output cypress.tar
 sudo apt -y install firefox
 sudo tar -xf cypress.tar
-sudo docker pull ishtaard/gest_test_nginx:1.0
-sudo docker pull ishtaard/gest_test_web:1.0
-sudo docker run -d -p 8000:80 ishtaard/gest_test_nginx:1.0
-sudo docker run -d -p 80:8000 ishtaard/gest_test_web
+sudo docker pull bikigrg/prod_env_setup_nginx:latest
+sudo docker pull bikigrg/prod_env_setup_web:latest
+sudo docker run -d -p 8000:80 bikigrg/prod_env_setup_nginx:latest
+sudo docker run -d -p 80:8000 bikigrg/prod_env_setup_web:latest
 sudo docker run -it \
 -v $PWD:/e2e \
 -w /e2e \
