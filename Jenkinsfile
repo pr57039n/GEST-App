@@ -22,7 +22,7 @@ pipeline{
                 dir ('Prod_Env_Setup') {
                     sh '''#!/bin/bash
                         cd Prod_Env_Setup
-                        sudo docker-compose build 
+                        sudo docker-compose build
                     '''
                 } 
             }
