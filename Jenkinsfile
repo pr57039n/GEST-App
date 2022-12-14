@@ -23,7 +23,7 @@ pipeline{
                     sh '''#!/bin/bash
                         cd Prod_Env_Setup
                         sudo docker build -t bikigrg/nginx_proxy ./nginx/
-                        sudo docker build -t biki/gest_app . 
+                        sudo docker build -t bikigrg/gest_app . 
                     '''
                 } 
             }
