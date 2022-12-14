@@ -30,7 +30,7 @@ DEBUG = True
 #DEBUG = int(os.environ.get("DEBUG", default=0))
 
 # ALLOWED_HOSTS = ['smswithdjango.herokuapp.com']
-ALLOWED_HOSTS = ['127.0.0.1']  # Not recommended but useful in dev mode
+ALLOWED_HOSTS = ['*']  # Not recommended but useful in dev mode
 #ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS")
 
 

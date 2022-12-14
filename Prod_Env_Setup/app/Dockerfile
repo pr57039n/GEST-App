@@ -2,8 +2,6 @@ FROM python:latest
 
 WORKDIR /app
 
-COPY . .
-
 RUN pip install --upgrade pip
 
 COPY ./requirements.txt .
@@ -14,10 +12,10 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-#EXPOSE 8000
+EXPOSE 8000
 
-#WORKDIR /app/app
+#WORKDIR ./app
 
-#RUN python manage.py migrate
+RUN python manage.py migrate
 
-#ENTRYPOINT python manage.py runserver 0.0.0.0:8000
+ENTRYPOINT gunicorn student_management_system.wsgi:application --bind 0.0.0.0:8000

@@ -91,3 +91,90 @@ resource "aws_route" "public-internet-igw-route" {
   gateway_id             = aws_internet_gateway.test-igw.id
   destination_cidr_block = "0.0.0.0/0"
 }
+
+resource "aws_ecs_cluster" "test" {
+  name = "${var.ecs_cluster_name}-cluster"
+}
+
+resource "aws_cloudwatch_log_group" "log-group" {
+  name = "/ecs/django-logs"
+
+  tags = {
+    Application = "django-app"
+  }
+}
+
+resource "aws_ecs_task_definition" "aws-django-task" {
+  family = "django-task"
+
+  container_definitions = <<EOF
+  [
+  {
+      "name": "NGINX",
+      "image": "michaelblasse/nginx_proxy:latest",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/django-logs",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "containerPort": 80
+        }
+      ]
+    },
+    {
+      "name": "GEST-App",
+      "image": "michaelblasse/gest-app:latest",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/django-logs",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "containerPort": 8000
+        }
+      ]
+    }
+  ]
+  EOF
+
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
+  memory                   = "2048"
+  cpu                      = "1024"
+  execution_role_arn       = "arn:aws:iam::717491011807:role/ECSTaskExec"
+  task_role_arn            = "arn:aws:iam::717491011807:role/ECSTaskExec"
+}
+
+# ECS Service
+resource "aws_ecs_service" "aws-ecs-service" {
+  name                 = "url-ecs-service"
+  cluster              = aws_ecs_cluster.test.id
+  task_definition      = aws_ecs_task_definition.aws-django-task.arn
+  launch_type          = "FARGATE"
+  scheduling_strategy  = "REPLICA"
+  desired_count        = 1
+  force_new_deployment = true
+
+  network_configuration {
+    subnets = [
+       aws_subnet.private-subnet-1.id,
+       aws_subnet.private-subnet-2.id
+    ]
+    assign_public_ip = false
+    security_groups  = [aws_security_group.ecs.id]
+  }
+   load_balancer {
+    target_group_arn = aws_lb_target_group.django-app.arn
+    container_name   = "NGINX"
+    container_port   = 80
+  }
+}

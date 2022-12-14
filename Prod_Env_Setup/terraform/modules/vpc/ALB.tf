@@ -7,15 +7,15 @@ resource "aws_lb" "test-LB" {
   security_groups    = [aws_security_group.load-balancer.id]
   subnets            = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-2.id]
 
-  depends_on = [
-    [aws_internet_gateway.igw]
-  ]
+  depends_on = [aws_internet_gateway.test-igw]
+  
 }
 
 resource "aws_lb_target_group" "django-app" {
   name        = "${var.ecs_cluster_name}-tg"
   port        = 80
   protocol    = "HTTP"
+  target_type = "ip"
   vpc_id      = aws_vpc.test-vpc.id
 
   health_check {
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "django-app" {
     healthy_threshold = 5
     timeout = 2
   }
-  depends_on = [aws_lb.test-lb]
+  depends_on = [aws_lb.test-LB]
 }
 
 # Listener (redirects traffic from the load balancer to the target group)
@@ -33,7 +33,7 @@ resource "aws_alb_listener" "ecs-alb-http-listener" {
   load_balancer_arn = aws_lb.test-LB.id
   port              = "80"
   protocol          = "HTTP"
-  depends_on        = [aws_alb_target_group.django-app]
+  #depends_on        = [aws_alb_target_group.django-app]
 
   default_action {
     type             = "forward"
