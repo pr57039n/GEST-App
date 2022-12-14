@@ -2,7 +2,6 @@ pipeline{
     agent any
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-        AWS_CREDENTIALS=credentials('TerraformUser')
     }
     stages {
         stage ('Build') {
