@@ -1,9 +1,9 @@
-#variable "aws_access_key" {}
-#variable "aws_secret_key" {}
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
 
 provider "aws" {
-  access_key = "AKIA2ODOMADP55Y2L2NS"
-  secret_key = "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"
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
   region = "us-east-1"
 }
 
