@@ -17,7 +17,7 @@ provider "aws" {
 }*/
 
 module "vpc" {
-  source       = "./Modules/vpc"
+  source       = "./modules/vpc"
  #region       = "us-east-1"
   #project_name = "Django-Deployment"
 }
