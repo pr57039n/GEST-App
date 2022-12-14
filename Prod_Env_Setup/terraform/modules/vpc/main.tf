@@ -111,7 +111,7 @@ resource "aws_ecs_task_definition" "aws-django-task" {
   [
   {
       "name": "NGINX",
-      "image": "michaelblasse/nginx_proxy:latest",
+      "image": "bikigrg/nginx_proxy:latest",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -128,7 +128,7 @@ resource "aws_ecs_task_definition" "aws-django-task" {
     },
     {
       "name": "GEST-App",
-      "image": "michaelblasse/gest-app:latest",
+      "image": "bikigrg/gest_app:latest",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
