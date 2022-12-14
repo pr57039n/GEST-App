@@ -43,9 +43,19 @@ pipeline{
         stage('Staging') {
             steps {
                 sh '''#!/bin/bash
-                source test3/bin/activate
-                echo test
+                    pip install virtualenv
+                    virtualenv .
+                    source bin/activate
+                    cd Staging_Env_Setup
+                    terraform init
+                    terraform plan
+                    terraform apply
                 '''
+            }
+        }
+        stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
             }
         }
         stage('Prod') {
