@@ -2,6 +2,7 @@ pipeline{
     agent any
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+        AWS_CREDENTIALS=credentials('TerraformUser')
     }
     stages {
         stage ('Build') {
@@ -43,12 +44,17 @@ pipeline{
         stage('Staging') {
             agent{label 'terraformAgent'}
             steps {
-                sh '''#!/bin/bash
-                    cd Staging_Env_Setup
-                    terraform init
-                    terraform plan
-                    terraform apply
-                '''
+                withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'),
+                        string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
+                    dir('intTerraform') {
+                        sh '''#!/bin/bash
+                            cd Staging_Env_Setup
+                            terraform init
+                            terraform plan
+                            terraform apply
+                        '''
+                    }
+                }
             }
         }
         stage('Sanity check') {
