@@ -115,7 +115,7 @@ pipeline{
                             terraform init
                             terraform plan -out plan.tfplan -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"
                             terraform apply plan.tfplan
-                            sleep 360
+                            sleep 180
                         '''
                     }
                 }
