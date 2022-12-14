@@ -19,5 +19,5 @@ output "private_subnet_az2" {
 }
 
 output "alb_url" {
-    value = "http://${aws_lb.docker_instance_LB.dns_name}"
+    value = "${aws_lb.docker_instance_LB.dns_name}"
 }
