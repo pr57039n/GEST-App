@@ -1,6 +1,6 @@
+
 variable "region" {}
 variable "project_name" {}
-
 variable "cidr_block" {}
 variable "public_subnet_az1_cidr" {}
 variable "private_subnet_az1_cidr" {}
