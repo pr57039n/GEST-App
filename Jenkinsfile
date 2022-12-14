@@ -41,11 +41,9 @@ pipeline{
             }
         }
         stage('Staging') {
+            agent{label 'terraformAgent'}
             steps {
                 sh '''#!/bin/bash
-                    pip install virtualenv
-                    virtualenv .
-                    source bin/activate
                     cd Staging_Env_Setup
                     terraform init
                     terraform plan
