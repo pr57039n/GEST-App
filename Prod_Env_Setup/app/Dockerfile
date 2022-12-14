@@ -18,4 +18,6 @@ EXPOSE 8000
 
 RUN python manage.py migrate
 
+RUN echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin@admin.com', 'password')" | python manage.py shell
+
 ENTRYPOINT gunicorn student_management_system.wsgi:application --bind 0.0.0.0:8000

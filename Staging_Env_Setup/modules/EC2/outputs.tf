@@ -13,3 +13,11 @@ output "aws_security_group_load_balancer_id" {
 output "aws_security_group_ec2" {
     value = aws_security_group.ec2_access.id
 }
+
+output "private_instance1_id" {
+    value = aws_instance.private_ec2_1.id
+}
+
+output "private_instance2_id" {
+  value = aws_instance.private_ec2_2.id
+}

@@ -16,6 +16,8 @@ module "VPC" {
     public_subnet_az2_cidr = var.public_subnet_az2_cidr
     private_subnet_az2_cidr = var.private_subnet_az2_cidr
     aws_security_group_load_balancer_id = module.EC2.aws_security_group_load_balancer_id
+    private_instance1_id = module.EC2.private_instance1_id
+    private_instance2_id = module.EC2.private_instance2_id
 }
 
 

@@ -39,3 +39,15 @@ resource "aws_alb_listener" "ec2-alb-http-listener" {
   }
 }
 
+# Target Groups for instances
+resource "aws_lb_target_group_attachment" "attach-app1" {
+  target_group_arn = aws_lb_target_group.docker_instances.arn
+  target_id = var.private_instance1_id
+  port = "80"
+}
+
+resource "aws_lb_target_group_attachment" "attach-app2" {
+  target_group_arn = aws_lb_target_group.docker_instances.arn
+  target_id = var.private_instance2_id
+  port = "80"
+}
