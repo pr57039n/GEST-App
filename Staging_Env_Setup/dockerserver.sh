@@ -10,7 +10,7 @@ sudo tar -xf cypress.tar
 sudo docker pull bikigrg/nginx_proxy:latest
 sudo docker pull bikigrg/gest_app:latest
 sudo docker run -d -p 80:80 bikigrg/nginx_proxy:latest
-sudo docker run -d -p 80:80 bikigrg/gest_app:latest
+sudo docker run -d -p 80:8000 bikigrg/gest_app:latest
 sudo docker run -it \
 -v $PWD:/e2e \
 -w /e2e \
