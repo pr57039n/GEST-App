@@ -22,7 +22,8 @@ pipeline{
                 dir ('Prod_Env_Setup') {
                     sh '''#!/bin/bash
                         cd Prod_Env_Setup
-                        sudo docker-compose build
+                        sudo docker build -t bikigrg/nginx_proxy ./nginx/
+                        sudo docker build -t biki/gest_app . 
                     '''
                 } 
             }
@@ -33,10 +34,8 @@ pipeline{
                 sh '''#!/bin/bash
                     sudo docker logout
                     sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
-                    sudo docker tag prod_env_setup_web:latest bikigrg/prod_env_setup_web:latest
-                    sudo docker tag prod_env_setup_nginx:latest bikigrg/prod_env_setup_nginx:latest
-                    sudo docker push bikigrg/prod_env_setup_nginx:latest
-                    sudo docker push bikigrg/prod_env_setup_web:latest
+                    sudo docker push bikigrg/nginx_proxy:latest
+                    sudo docker push bikigrg/gest_app:latest
                 '''
             }
         }
