@@ -12,7 +12,7 @@ resource "aws_lb" "docker_instance_LB" {
 
 resource "aws_lb_target_group" "docker_instances" {
   name        = "docker-instances-tg"
-  port        = 80
+  port        = 8000
   protocol    = "HTTP"
   vpc_id      = aws_vpc.VPC.id
 
