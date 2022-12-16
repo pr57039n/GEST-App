@@ -2,7 +2,7 @@
 resource "aws_security_group" "load-balancer" {
   name        = "load_balancer_security_group"
   description = "Controls access to the ALB"
-  vpc_id      = aws_vpc.test-vpc.id
+  vpc_id      = "vpc-0ae47649f0dfc8b6a"
 
   ingress {
     from_port   = 80
@@ -30,7 +30,7 @@ resource "aws_security_group" "load-balancer" {
 resource "aws_security_group" "ecs" {
   name        = "ecs_security_group"
   description = "Allows inbound access from the ALB only"
-  vpc_id      = aws_vpc.test-vpc.id
+  vpc_id      = "vpc-0ae47649f0dfc8b6a"
 
   ingress {
     from_port       = 0

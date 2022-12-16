@@ -1,8 +1,22 @@
+# EC2 - Public Subnet
+resource "aws_instance" "bastion_ec2" {
+    ami = "ami-0574da719dca65348"
+    instance_type = "t3.medium"
+    subnet_id = "subnet-0e4735713790af595"
+    key_name = var.key_name
+    vpc_security_group_ids = [aws_security_group.bastion-ssh.id]
+    user_data = "${file("dockerserver.sh")}"
+
+    tags = {
+        Name : "Bastion Host"
+    }
+}
+
 # EC2 - Private Subnet
 resource "aws_instance" "private_ec2_1" {
     ami = "ami-0574da719dca65348"
-    instance_type = "t2.micro"
-    subnet_id = var.private_subnet_az1_id
+    instance_type = "t3.medium"
+    subnet_id = "subnet-0252ce56fe6537a34"
     key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.ec2_access.id]
     user_data = "${file("dockerserver.sh")}"
@@ -14,8 +28,8 @@ resource "aws_instance" "private_ec2_1" {
 
 resource "aws_instance" "private_ec2_2" {
     ami = "ami-0574da719dca65348"
-    instance_type = "t2.micro"
-    subnet_id = var.private_subnet_az2_id
+    instance_type = "t3.medium"
+    subnet_id = "subnet-08d2c8eb2a0739e99"
     key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.ec2_access.id]
     user_data = "${file("dockerserver.sh")}"
@@ -30,7 +44,7 @@ resource "aws_instance" "private_ec2_2" {
 resource "aws_security_group" "ec2_access" {
   name        = "ec2 security group"
   description = "Allows inbound access from ALB only"
-  vpc_id = var.vpc_id
+  vpc_id = "vpc-0ae47649f0dfc8b6a"
  
 
   ingress {
@@ -49,6 +63,13 @@ resource "aws_security_group" "ec2_access" {
 
   }
 
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    security_groups = [aws_security_group.bastion-ssh.id]
+  }
+
   egress {
     from_port = 0
     to_port = 0
@@ -57,11 +78,32 @@ resource "aws_security_group" "ec2_access" {
   }  
 }
 
+#Bastion host SSH
+resource "aws_security_group" "bastion-ssh" {
+  name        = "bastion_security_group"
+  description = "SSH into public to private"
+  vpc_id      = "vpc-0ae47649f0dfc8b6a"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 # ALB Security Group (Traffic Internet -> ALB)
 resource "aws_security_group" "load-balancer" {
   name        = "load_balancer_security_group"
   description = "Controls access to the ALB"
-  vpc_id      = var.vpc_id
+  vpc_id      = "vpc-0ae47649f0dfc8b6a"
 
   ingress {
     from_port   = 80

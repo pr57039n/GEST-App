@@ -5,16 +5,15 @@ resource "aws_lb" "docker_instance_LB" {
   load_balancer_type = "application"
   internal           = false
   security_groups = [var.aws_security_group_load_balancer_id]
-  subnets            = [aws_subnet.public_subnet_az1.id, aws_subnet.public_subnet_az2.id]
+  subnets            = ["subnet-0252ce56fe6537a34", "subnet-06db5e975a01e1b3e"]
 
-  depends_on = [aws_internet_gateway.internet_gateway]
 }
 
 resource "aws_lb_target_group" "docker_instances" {
   name        = "docker-instances-tg"
   port        = 8000
   protocol    = "HTTP"
-  vpc_id      = aws_vpc.VPC.id
+  vpc_id      = "vpc-0ae47649f0dfc8b6a"
 
   health_check {
     enabled = true
