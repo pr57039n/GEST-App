@@ -1,7 +1,7 @@
 # EC2 - Public Subnet
 resource "aws_instance" "bastion_ec2" {
     ami = "ami-0574da719dca65348"
-    instance_type = "t3.medium"
+    instance_type = "t2.micro"
     subnet_id = "subnet-0e4735713790af595"
     key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.bastion-ssh.id]
