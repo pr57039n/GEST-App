@@ -1,4 +1,4 @@
-# EC2 - Public Subnet
+# EC2 - Public
 resource "aws_instance" "bastion_ec2" {
     ami = "ami-0574da719dca65348"
     instance_type = "t2.micro"

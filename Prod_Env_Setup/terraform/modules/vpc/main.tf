@@ -177,3 +177,52 @@ resource "aws_ecs_service" "aws-ecs-service" {
     container_port   = 80
   }
 }
+
+
+resource "aws_cloudwatch_metric_alarm" "djangomonitor" {
+ alarm_name                = "autoscaling-instance"
+  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  evaluation_periods        = "2"
+  threshold                 = "1"
+  alarm_description         = "Alarm to check if autoscaling is needed"
+  insufficient_data_actions = []
+  metric_query {
+    id          = "customMetric"
+    expression  = "IF(m1 > 70, 1, 0) OR IF(m2 > 75, 1, 0)"
+    label       = "custom metric"
+    return_data = "true"
+  }
+
+  metric_query {
+    id = "m1"
+
+    metric {
+      metric_name = "CPUUtilization"
+      namespace   = "AWS/ECS"
+      period      = "120"
+      stat        = "Average"
+      unit        = "Percent"
+      
+      dimensions = {
+        ecs_cluster_name = "prod"
+        ServiceName = "url-ecs-service"
+      }
+    }
+  }
+  metric_query {
+    id = "m2"
+
+    metric {
+       metric_name = "MemoryUtilization"
+      namespace   = "AWS/ECS"
+      period      = "120"
+      stat        = "Average"
+      unit        = "Percent"
+
+      dimensions = {
+        ecs_cluster_name = "prod"
+        ServiceName = "url-ecs-service"
+      }
+    }
+  }
+}
