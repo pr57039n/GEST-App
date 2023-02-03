@@ -9,8 +9,6 @@
 
 # COPY . .
 # EXPOSE 8000
-
-# RUN python manage.py makemigrations
 # ENTRYPOINT manage.py runserver
 
 # Dockerfile
