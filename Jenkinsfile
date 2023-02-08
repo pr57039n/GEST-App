@@ -2,19 +2,7 @@ pipeline{
     agent any
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-    }
-    stages {
-        stage ('Build') {
-            steps {
-                sh '''#!/bin/bash
-                pip install virtualenv
-                virtualenv .
-                source bin/activate
-                pip install pip --upgrade
-                cd Prod_Env_Setup
-                pip install -r requirements.txt
-                '''
-            }
+
             post{
                 success { 
                     slackSend channel: 'jenkinspipeline-slack',
